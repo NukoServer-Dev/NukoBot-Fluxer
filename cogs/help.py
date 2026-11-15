@@ -42,6 +42,9 @@ AutoModを削除します。
 
 `!.choyen <top> <down>`
 5000兆円ほしい！を生成します。
+
+`!.reencode <text>`
+文字化けさせます。
 """)
         else:
             embed = fluxer.Embed(title="SharkBotのヘルプ", description="""`!.help (引数なし)`
@@ -83,7 +86,9 @@ AutoModを削除します。
         embed = self.build_embed(emoji, True)
         await message.edit(embeds=[embed])
 
-        await message.remove_reaction(emoji, reaction_info.user_id)
+        await message.clear_reactions()
+
+        self.HELP_SESSIONS.remove(reaction_info.message_id)
 
 async def setup(bot: fluxer.Bot):
     await bot.add_cog(HelpCog(bot))

@@ -12,7 +12,7 @@ class FunCog(fluxer.Cog):
     async def fox_command(self, msg: fluxer.Message):
         async with aiohttp.ClientSession() as session:
             async with session.get("https://randomfox.ca/floof/") as fox:
-                await msg.reply(embed=fluxer.Embed(title="生成しました。").set_image(url=json.loads(await fox.text())['image']))
+                await msg.reply(embed=fluxer.Embed(title="生成しました。", color=5793266).set_image(url=json.loads(await fox.text())['image']))
 
     @fluxer.Cog.command(name="reencode")
     async def reencode_command(self, msg: fluxer.Message):
@@ -20,7 +20,7 @@ class FunCog(fluxer.Cog):
         if len(split_message) < 2:
             await msg.reply("使用方法:\n`!.reencode <text>`")
             return
-        await msg.reply(embed=fluxer.Embed(description=split_message[1].encode("utf8").decode("sjis", errors="ignore"), title="文字化けさせました。"))
+        await msg.reply(embed=fluxer.Embed(description=split_message[1].encode("utf8").decode("sjis", errors="ignore"), title="文字化けさせました。", color=5793266))
 
     @fluxer.Cog.command(name="choyen")
     async def choyen_command(self, msg: fluxer.Message):
@@ -37,7 +37,7 @@ class FunCog(fluxer.Cog):
                 text += "&rainbow=true"
             return text
 
-        await msg.reply(embed=fluxer.Embed(title="生成しました。").set_image(url=make_5000(split_message[1], split_message[2])))
+        await msg.reply(embed=fluxer.Embed(title="生成しました。", color=5793266).set_image(url=make_5000(split_message[1], split_message[2])))
 
 async def setup(bot: fluxer.Bot):
     await bot.add_cog(FunCog(bot))

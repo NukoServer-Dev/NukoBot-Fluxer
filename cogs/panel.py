@@ -148,8 +148,22 @@ class PanelCog(fluxer.Cog):
                 await message.remove_reaction(emoji, reaction_info.user_id)
                 return
 
+async def init_db(bot: fluxer.Bot):
+    await bot.CURSUR.execute(
+        """
+        CREATE TABLE IF NOT EXISTS rolepanels (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            channel_id TEXT NOT NULL,
+            message_id TEXT NOT NULL,
+            emoji_to_roles TEXT NOT NULL
+        )
+        """
+    )
+
 async def setup(bot: fluxer.Bot):
     await bot.add_cog(PanelCog(bot))
+
+    asyncio.create_task(init_db(bot))
 
 async def teardown(bot: fluxer.Bot):
     await bot.remove_cog(PanelCog(bot).__class__.__name__)

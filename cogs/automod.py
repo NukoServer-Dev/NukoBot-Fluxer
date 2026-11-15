@@ -195,8 +195,45 @@ class AutoModCog(fluxer.Cog):
         if discord_invite:
             return
 
+async def init_db(bot: fluxer.Bot):
+    await bot.CURSUR.execute(
+        """
+        CREATE TABLE IF NOT EXISTS automod (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            guild_id TEXT NOT NULL,
+            automod_id TEXT NOT NULL
+        )
+        """
+    )
+
+    # 警告
+    await bot.CURSUR.execute(
+        """
+        CREATE TABLE IF NOT EXISTS warns (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            guild_id TEXT NOT NULL,
+            user_id TEXT NOT NULL,
+            count INTEGER NOT NULL
+        )
+        """
+    )
+
+    # 警告と処罰
+    await bot.CURSUR.execute(
+        """
+        CREATE TABLE IF NOT EXISTS punishments (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            guild_id TEXT NOT NULL,
+            action TEXT NOT NULL,
+            count INTEGER NOT NULL
+        )
+        """
+    )
+
 async def setup(bot: fluxer.Bot):
     await bot.add_cog(AutoModCog(bot))
+
+    asyncio.create_task(init_db(bot))
 
 async def teardown(bot: fluxer.Bot):
     await bot.remove_cog(AutoModCog(bot).__class__.__name__)
