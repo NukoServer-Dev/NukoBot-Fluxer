@@ -16,7 +16,7 @@ class HelpCog(fluxer.Cog):
 
 `!.rp remove <message_id> <role_id>`
 ロールパネルからロールを削除します。
-""")
+""", color=5793266)
         elif emoji == "🔨":
             embed = fluxer.Embed(title="AutoMod", description="""`!.automod create <automod_id>`
 AutoModを作成します。
@@ -35,7 +35,7 @@ AutoModを削除します。
 警告をクリアします。
 
 > <automod_id>には、現在`invite` `discord_invite`が指定できます。
-""")
+""", color=5793266)
         elif emoji == "😆":
             embed = fluxer.Embed(title="楽しい", description="""`!.fox`
 狐の画像を表示します。
@@ -45,15 +45,20 @@ AutoModを削除します。
 
 `!.reencode <text>`
 文字化けさせます。
-""")
+""", color=5793266)
+        elif emoji == "🔍":
+            embed = fluxer.Embed(title="検索", description="""`!.userinfo <userid>`
+指定したユーザーの情報を表示します。
+""", color=5793266)
         else:
             embed = fluxer.Embed(title="SharkBotのヘルプ", description="""`!.help (引数なし)`
 このメッセージを表示します。
 
 👜 ロールパネルを作成するコマンドを知ります。
 🔨 AutoModや、処罰関連の設定をするコマンドを知ります。
+🔍 検索などができるコマンドを知ります。
 😆 面白い機能とコマンドを知ります。
-""")
+""", color=5793266)
 
         if is_edit:
             embed = embed.to_dict()
@@ -68,6 +73,7 @@ AutoModを削除します。
         await message.add_reaction("🏠")
         await message.add_reaction("👜")
         await message.add_reaction("🔨")
+        await message.add_reaction("🔍")
         await message.add_reaction("😆")
 
     @fluxer.Cog.listener(name="on_raw_reaction_add")
