@@ -19,7 +19,7 @@ class BadgeCog(fluxer.Cog):
                     "afk": False,
                     "mobile": False,
                     "custom_status": {
-                        "text": "!.help / sharkbot.jp"
+                        "text": "!.help / nuko-server.xyz"
                     }
                 },
             )

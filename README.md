@@ -1,2 +1,2 @@
-# SharkBot-Fluxer
-FluxerバージョンのSharkBot
+# NukoBot-Fluxer
+FluxerバージョンのNukoBot
