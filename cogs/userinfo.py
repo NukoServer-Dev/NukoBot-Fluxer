@@ -26,6 +26,13 @@ class UserInfoCog(fluxer.Cog):
         except:
             await msg.send("❌️不明なユーザーかもしれない")
 
+    @fluxer.Cog.command(name="whoami")
+    async def whoami_command(self, msg: fluxer.Message):
+        try:
+            await msg.send(embed=self.make_userinfo_embed(msg.author))
+        except:
+            await msg.send("❌️不明なユーザーかもしれない")
+
 async def setup(bot: fluxer.Bot):
     await bot.add_cog(UserInfoCog(bot))
 
